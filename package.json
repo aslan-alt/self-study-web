@@ -6,6 +6,7 @@
     "lint": "next lint --fix",
     "dev": "next dev",
     "build": "next build",
+    "test": "jest",
     "start": "next build && next start",
     "reboot": "rm -rf node_modules && yarn",
     "typeorm:build": "babel ./src --out-dir dist --extensions .ts,.tsx",
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "@babel/cli": "^7.17.10",
+    "@testing-library/user-event": "^14.2.0",
     "@types/md5": "^2.3.2",
     "@typescript-eslint/eslint-plugin": "^5.21.0",
     "antd": "^4.20.2",
@@ -42,6 +44,8 @@
   "devDependencies": {
     "@babel/core": "^7.17.10",
     "@babel/plugin-proposal-decorators": "^7.17.9",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
     "@types/axios": "^0.14.0",
     "@types/classnames": "^2.3.1",
     "@types/lodash": "^4.14.182",
@@ -57,6 +61,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "next-images": "^1.8.4",
     "prettier": "^2.6.2",
     "typescript": "^4.6.4"

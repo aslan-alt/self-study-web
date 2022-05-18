@@ -2,7 +2,7 @@ import React from 'react';
 import {GetServerSideProps, NextPage} from 'next';
 
 type Props = {
-  userInfo: {};
+  userInfo?: {};
 };
 
 const Index: NextPage<Props> = () => {
