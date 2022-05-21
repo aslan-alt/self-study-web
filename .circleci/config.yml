@@ -1,11 +1,9 @@
 version: 2
 jobs:
-  build:
+  test:
     docker: #执行容器
       - image: circleci/node:17.2 #依赖环境
-    branches: #分支
-      only:
-        - master
+
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - run:
