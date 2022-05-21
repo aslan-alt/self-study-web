@@ -5,10 +5,10 @@ type Props = {
   userInfo?: {};
 };
 
-const Index: NextPage<Props> = () => {
-  return <div>首页</div>;
+const Home: NextPage<Props> = () => {
+  return <div data-tn="home">首页x</div>;
 };
-export default Index;
+export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
   return {

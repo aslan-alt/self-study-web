@@ -10,7 +10,9 @@
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "types": ["cypress"],
     "lib": [
+      "es5",
       "dom",
       "dom.iterable",
       "esnext"
