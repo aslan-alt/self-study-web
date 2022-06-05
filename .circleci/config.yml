@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  ci:
     docker: #执行容器
       - image: circleci/node:17.2 #依赖环境
 
