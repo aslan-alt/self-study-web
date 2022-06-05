@@ -1,11 +1,12 @@
 version: 2
 jobs:
-  test:
+  build:
     docker: #执行容器
       - image: circleci/node:17.2 #依赖环境
 
     # Steps are a list of commands to run inside the docker container above.
     steps:
+      - checkout
       - run:
           name: Install
           command: yarn
