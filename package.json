@@ -7,8 +7,10 @@
     "dev": "next dev",
     "build": "next build",
     "test": "jest",
-    "cypress": "cypress open",
+    "e2e:dev": "cypress open",
+    "e2e:run": "cypress run",
     "start": "next build && next start",
+    "ci": "start-server-and-test start http://localhost:3000 e2e:run",
     "reboot": "rm -rf node_modules && yarn",
     "typeorm:build": "babel ./src --out-dir dist --extensions .ts,.tsx",
     "migration:create": "typeorm migration:create",
@@ -67,6 +69,7 @@
     "jest-environment-jsdom": "^28.1.0",
     "next-images": "^1.8.4",
     "prettier": "^2.6.2",
+    "start-server-and-test": "^1.14.0",
     "typescript": "^4.6.4"
   }
 }

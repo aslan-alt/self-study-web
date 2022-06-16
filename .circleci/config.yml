@@ -1,15 +1,52 @@
 version: 2
-jobs:
-  build:
-    docker: #执行容器
-      - image: circleci/node:17.2 #依赖环境
 
+jobs:
+  unit-test-and-e2e-test:
+    docker: #执行容器
+      - image: cypress/base:17.8.0 #依赖环境
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - dependencies_imooc
       - run:
           name: Install
           command: yarn
+      - save_cache:
+          key: dependencies_imooc
+          paths:
+            - node_modules
       - run:
-          name: Test
+          name: Unit test
           command: yarn test
+      - run:
+          name: E2E Test
+          command: yarn ci
+  build:
+    docker:
+      - image: cimg/node:18.3.0
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+          docker_layer_caching: true
+      - add_ssh_keys:
+          fingerprints:
+            - 2f:cf:6e:ca:a7:d6:d1:50:6c:c0:d4:2c:1d:1d:d7:65
+      - run:
+          name: Update known hosts
+          command: ssh-keyscan -H 47.104.65.182 >> ~/.ssh/known_hosts
+      - run:
+          name: Docker Build
+          command: docker build -t aslanxiong/node-web-app .
+#      - run:
+#          name: Docker Start
+#          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
+
+workflows:
+  version: 2
+  test_and_build:
+    jobs:
+      - unit-test-and-e2e-test
+      - build
