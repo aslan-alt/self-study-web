@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   unit-test-and-e2e-test:
@@ -26,7 +26,10 @@ jobs:
           command: yarn ci
   build:
     docker:
-      - image: cimg/node:18.3.0
+      - image: cimg/node:17.2.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -44,7 +47,6 @@ jobs:
       - run:
           name: Docker Login
           command: |
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
             docker push aslanxiong/node-web-app
 #      - run:
 #          name: Docker Start
