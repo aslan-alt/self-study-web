@@ -26,6 +26,9 @@ jobs:
   build:
     docker:
       - image: cimg/node:18.3.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
     steps:
       - checkout
       - setup_remote_docker:
@@ -40,6 +43,11 @@ jobs:
       - run:
           name: Docker Build
           command: docker build -t aslanxiong/node-web-app .
+      - run:
+          name: Docker Login
+          command: |
+            docker login -e $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push aslanxiong/node-web-app
 #      - run:
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
