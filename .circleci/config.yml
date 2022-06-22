@@ -7,17 +7,17 @@ jobs:
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dependencies_imooc
+#      - restore_cache:
+#          keys:
+#            - dependencies_imooc
       - run:
           name: Install
           command: yarn
-      - save_cache:
-          key: dependencies_imooc
-          paths:
-            - node_modules
-            - /root/.cache/Cypress
+#      - save_cache:
+#          key: dependencies_imooc
+#          paths:
+#            - node_modules
+#            - /root/.cache/Cypress
       - run:
           name: Unit test
           command: yarn test
