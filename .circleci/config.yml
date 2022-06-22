@@ -43,8 +43,9 @@ jobs:
           command: docker build -t aslanxiong/node-web-app .
       - run:
           name: Docker Login
-          command:
+          command: |
             echo $DOCKERHUB_USERNAME
+            echo $DOCKERHUB_PASSWORD
 #            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
 #            docker push aslanxiong/node-web-app
 #      - run:
