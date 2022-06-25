@@ -40,14 +40,12 @@ jobs:
           command: ssh-keyscan -H 47.104.65.182 >> ~/.ssh/known_hosts
       - run:
           name: Docker Build
-          command: docker build -t aslanxiong/node-web-app .
+          command: docker build -t aslanxiong .
       - run:
           name: Docker Login
           command: |
-            echo $DOCKERHUB_USERNAME
-            echo $DOCKERHUB_PASSWORD
             docker login -u 874470891 -p 874470891xS!
-            docker push aslanxiong/node-web-app
+            docker push 874470891/aslanxiong
 #      - run:
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
