@@ -5,6 +5,6 @@ describe('<AddButton />', () => {
   it('should trigger onClick when click add button', () => {
     render(<Home />);
 
-    expect(screen.getByText('首页 xiong1')).toBeInTheDocument();
+    expect(screen.getByText('首页 xiong12')).toBeInTheDocument();
   });
 });
