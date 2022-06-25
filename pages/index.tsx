@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = () => {
-  return <div data-tn="home">首页1234</div>;
+  return <div data-tn="home">首页 test</div>;
 };
 export default Home;
 
