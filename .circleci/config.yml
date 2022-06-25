@@ -46,8 +46,8 @@ jobs:
           command: |
             echo $DOCKERHUB_USERNAME
             echo $DOCKERHUB_PASSWORD
-#            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
-#            docker push aslanxiong/node-web-app
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push aslanxiong/node-web-app
 #      - run:
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
