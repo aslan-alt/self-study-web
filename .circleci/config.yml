@@ -46,7 +46,7 @@ jobs:
           command: |
             echo $DOCKERHUB_USERNAME
             echo $DOCKERHUB_PASSWORD
-            docker login -u xiongjingsongtest@gmail.com -p 874470891xS!
+            docker login -u 874470891 -p 874470891xS!
             docker push aslanxiong/node-web-app
 #      - run:
 #          name: Docker Start
