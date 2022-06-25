@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 
 jobs:
   unit-test-and-e2e-test:
@@ -7,16 +7,17 @@ jobs:
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dependencies_imooc
+#      - restore_cache:
+#          keys:
+#            - dependencies_imooc
       - run:
           name: Install
           command: yarn
-      - save_cache:
-          key: dependencies_imooc
-          paths:
-            - node_modules
+#      - save_cache:
+#          key: dependencies_imooc
+#          paths:
+#            - node_modules
+#            - /root/.cache/Cypress
       - run:
           name: Unit test
           command: yarn test
@@ -25,7 +26,7 @@ jobs:
           command: yarn ci
   build:
     docker:
-      - image: cimg/node:18.3.0
+      - image: cimg/node:17.2.0
     steps:
       - checkout
       - setup_remote_docker:
@@ -39,7 +40,16 @@ jobs:
           command: ssh-keyscan -H 47.104.65.182 >> ~/.ssh/known_hosts
       - run:
           name: Docker Build
-          command: docker build -t aslanxiong/node-web-app .
+          command: docker build -t 874470891/self-study-web .
+      - run:
+          name: Docker Login
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
+            docker push 874470891/self-study-web
+      - run:
+          name: Deploy
+          command: ssh $SERVERNAME "cd ./app/self-study-web/ && sh ./bin/deploy.sh"
+
 #      - run:
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
