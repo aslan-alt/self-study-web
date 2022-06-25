@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 git pull
-yarn install --production=false
+yarn install
 #yarn build
 #yarn typeorm:build
 #yarn migration:run
