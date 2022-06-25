@@ -45,7 +45,7 @@ jobs:
           name: Docker Login
           command: |
             docker login -u 874470891 -p 874470891xS!
-            docker push 874470891/aslanxiong
+            docker push 874470891/self-study-web
 #      - run:
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
