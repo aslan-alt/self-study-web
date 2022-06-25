@@ -48,7 +48,7 @@ jobs:
             docker push 874470891/self-study-web
       - run:
           name: Deploy
-          command: ssh $SERVERNAME "cd ./app/self-study-web/ && sh ./"
+          command: ssh $SERVERNAME "cd ./app/self-study-web/ && sh ./bin/deploy.sh"
 
 #      - run:
 #          name: Docker Start
