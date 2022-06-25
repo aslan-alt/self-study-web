@@ -2,9 +2,14 @@
   "name": "nextjs-blog-1",
   "version": "0.1.0",
   "private": true,
+  "git-hooks": {
+    "pre-push": "next lint --ext .ts,.tsx --fix && yarn typeCheck && yarn prettier"
+  },
   "scripts": {
     "lint": "next lint --fix",
+    "typeCheck":" tsc --noEmit -p tsconfig.json",
     "dev": "next dev",
+    "prettier": "prettier --list-different --write '{pages,src,cypress,lib,__tests__}/**/*.{ts,tsx,js,jsx}' ",
     "build": "next build",
     "test": "jest",
     "e2e:dev": "cypress open",
