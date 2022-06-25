@@ -44,11 +44,11 @@ jobs:
       - run:
           name: Docker Login
           command: |
-            docker login -u 874470891 -p 874470891xS!
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD
             docker push 874470891/self-study-web
       - run:
           name: Deploy
-          command: ssh jingsong@47.104.65.182 "pwd && ls"
+          command: ssh $SERVERNAME "cd ./app/self-study-web/ && sh ./"
 
 #      - run:
 #          name: Docker Start
