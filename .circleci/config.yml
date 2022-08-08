@@ -48,9 +48,9 @@ jobs:
             docker push 874470891/self-study-web
       - run:
           name: Deploy
-          command: ssh $SERVERNAME "cd ./app/self-study-web/ && sh ./bin/deploy.sh"
+          command: ssh jingsong@$SERVERNAME "cd ./app/self-study-web/ && sh ./bin/deploy.sh"
 
-#      - run:
+#      - run:!
 #          name: Docker Start
 #          command: docker run --name app --network=host -p 3000:3000 -d aslanxiong/node-web-app
 
