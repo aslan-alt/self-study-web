@@ -11,6 +11,9 @@ const customJestConfig = {
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
   // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
   moduleDirectories: ['node_modules', 'test-utils'],
+  moduleNameMapper: {
+    '^@/components/(.*)$': '<rootDir>/components/$1',
+  },
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['<rootDir>/__tests__/**/*.test.tsx'],
   setupFilesAfterEnv: ['<rootDir>/jestSetupTests.ts'],

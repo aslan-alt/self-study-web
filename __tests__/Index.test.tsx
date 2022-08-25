@@ -1,10 +1,10 @@
 import {render, screen} from '@testing-library/react';
 import Home from '../pages';
 
-describe('<AddButton />', () => {
-  it('should trigger onClick when click add button', () => {
+describe('<Home />', () => {
+  it('should render Home', () => {
     render(<Home />);
 
-    expect(screen.getByText('首页')).toBeInTheDocument();
+    expect(screen.getByTestId('home-container')).toBeInTheDocument();
   });
 });

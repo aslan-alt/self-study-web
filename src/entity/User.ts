@@ -56,7 +56,7 @@ export class User {
     }
   }
   hasErrors() {
-    return !!Object.values(this.errors).find((v) => v.length > 0);
+    return Object.values(this.errors).some((v) => v.length > 0);
   }
 
   @BeforeInsert()

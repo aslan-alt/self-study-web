@@ -7,7 +7,7 @@ export default function App({Component, pageProps}: AppProps) {
   return (
     <>
       <Head>
-        <title>学渣学习网</title>
+        <title>我的科技树</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
