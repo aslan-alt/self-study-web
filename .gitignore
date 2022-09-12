@@ -33,5 +33,5 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
-
+.e2e_output
 
