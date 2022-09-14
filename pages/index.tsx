@@ -1,18 +1,15 @@
 import React from 'react';
 import {GetServerSideProps, NextPage} from 'next';
-import {Header} from '@/components/Header';
+import {Layout} from '@/components/Layout';
 
 type Props = {
   userInfo?: {};
 };
 
 const Home: NextPage<Props> = () => {
-  return (
-    <div data-tn="home-container">
-      <Header />
-    </div>
-  );
+  return <Layout data-tn="home-container" rightContent={'test'} />;
 };
+
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
