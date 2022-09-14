@@ -18,8 +18,14 @@ a{
   color:inherit;
 }
 
+ul,li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 body{
   font-family: $font-hei;
+  font-size: 16px;
 }
 
 :root {

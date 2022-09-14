@@ -70,13 +70,13 @@ const SignInButton = styled.div`
   color: #065fd4;
   height: 34px;
   border: 1px solid var(--ytd-searchbox-legacy-button-border-color);
-  min-width: 80px;
-  padding: 0 8px;
+  min-width: 90px;
+  padding: 0 14px;
   justify-content: space-between;
-  border-radius: 20px;
+  border-radius: var(--cx-spacing-3x);
   font-size: var(--cx-spacing-2x);
   cursor: pointer;
   :hover {
-    background: rgba(62, 166, 255, 0.2);
+    background: #def1ff;
   }
 `;
