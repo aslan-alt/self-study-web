@@ -28,7 +28,6 @@ export const Lessons = () => {
           </Item>
         );
       })}
-      s
     </Container>
   );
 };
