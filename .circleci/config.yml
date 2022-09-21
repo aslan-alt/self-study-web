@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   unit-test-and-e2e-test:
     docker: #执行容器
-      - image: cypress/base:17.8.0 #依赖环境
+      - image: cypress/base:16.17.0 #依赖环境
     # Steps are a list of commands to run inside the docker container above.
     steps:
       - checkout
@@ -26,7 +26,7 @@ jobs:
           command: yarn ci
   build:
     docker:
-      - image: cimg/node:17.2.0
+      - image: cimg/node:16.17.0
     steps:
       - checkout
       - setup_remote_docker:

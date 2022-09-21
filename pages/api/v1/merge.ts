@@ -20,6 +20,7 @@ const Merge: NextApiHandler = async (req, res) => {
           fs.readFileSync(path.join(needMergeFilePath, chunkPath))
         );
       });
+    fse.removeSync(needMergeFilePath);
     res.status(200).json({status: 'success'});
   } catch (error) {
     res.status(500).json({status: 'failed', error});
