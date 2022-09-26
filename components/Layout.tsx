@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import styled from 'styled-components';
 import {Header} from '@/components/Header';
-import {Lessons} from '@/components/Lessons';
 
 type Props = {
   leftContent?: React.ReactNode;
@@ -9,7 +8,7 @@ type Props = {
   headerContent?: React.ReactNode;
 };
 export const Layout: FC<Props> = ({
-  leftContent = <Lessons />,
+  leftContent,
   rightContent,
   headerContent = <Header />,
   ...reset

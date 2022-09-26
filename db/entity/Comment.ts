@@ -6,11 +6,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import {Video} from '@/DB/entity/Video';
 import {Post} from './Post';
 import {User} from './User';
 
 @Entity('comments')
-export class Comment {
+class Comment {
   @PrimaryGeneratedColumn('increment')
   id: number;
   @Column('int')
@@ -23,10 +24,14 @@ export class Comment {
   content: string;
   @ManyToOne('User', 'comments')
   user: User;
-  @ManyToOne('Post', 'comment')
+  @ManyToOne('Post', 'comments')
   post: Post;
+  @ManyToOne('Video', 'comments')
+  video: Video;
   @CreateDateColumn({type: 'timestamp', name: 'createdAt', nullable: false})
   createdAt: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
   updateAt: Date;
 }
+
+export {Comment};

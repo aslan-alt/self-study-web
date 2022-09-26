@@ -4,7 +4,8 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/constants/*": ["constants/*"]
+      "@/constants/*": ["constants/*"],
+      "@/DB/*": ["db/*"]
     },
     "target": "es5",
     "module": "esnext",
@@ -15,12 +16,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "types": ["cypress","node"],
-    "lib": [
-      "es5",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noEmit": true,
     "moduleResolution": "node",

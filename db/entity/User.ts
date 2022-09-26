@@ -9,25 +9,29 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {Comment} from './Comment';
-import {Post} from './Post';
+import {Course, Video, Comment, Post} from '@/DB/entity';
 
 @Entity('users')
-export class User {
+class User {
   @PrimaryGeneratedColumn('increment')
   id: number;
   @Column('varchar')
   username: string;
   @Column('varchar')
   passwordDigest: string;
+  @OneToMany('Post', 'author')
+  posts: Post[];
+  @OneToMany('Video', 'author')
+  videos: Video[];
+  @OneToMany('Course', 'author')
+  courses: Course[];
+  @OneToMany('Comment', 'user')
+  comments: Comment[];
   @CreateDateColumn({type: 'timestamp', name: 'createdAt', nullable: false})
   createdAt: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
   updatedAt: Date;
-  @OneToMany('Post', 'author')
-  posts: Post[];
-  @OneToMany('Comment', 'user')
-  comments: Comment[];
+
   errors = {
     username: [] as string[],
     password: [] as string[],
@@ -67,3 +71,4 @@ export class User {
     return _.omit(this, ['password', 'errors', 'passwordDigest', 'passwordConfirmation']);
   }
 }
+export {User};

@@ -1,6 +1,6 @@
 import md5 from 'md5';
-import {getDatabaseConnection} from 'lib/getDatabaseConnection';
-import {User} from 'src/entity/User';
+import {User} from '@/DB/entity/User';
+import {getConnection} from '@/DB/getConnection';
 
 export class SignIn {
   username: string;
@@ -11,7 +11,7 @@ export class SignIn {
     if (this.username.trim() === '') {
       this.errors.username.push('');
     }
-    const connection = await getDatabaseConnection();
+    const connection = await getConnection();
     let user;
     try {
       user = await connection.manager.findOne(User, {where: {username: this.username}});

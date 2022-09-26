@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, TableColumn} from 'typeorm';
 
-export class AddCreateAtAndUpdatedAtForUsers1621351124364 implements MigrationInterface {
+export class AddCreateAtAndUpdatedAtForUsers1665313597042 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.addColumns('users', [
       new TableColumn({name: 'createdAt', type: 'timestamp', isNullable: false, default: 'now()'}),

@@ -1,6 +1,6 @@
 import {MigrationInterface, QueryRunner, TableIndex} from 'typeorm';
 
-export class AddUniqueUsernameToUsers1622552292379 implements MigrationInterface {
+export class AddUniqueUsernameToUsers1665313771150 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createIndex(
       'users',

@@ -11,7 +11,7 @@ import {Comment} from './Comment';
 import {User} from './User';
 
 @Entity('posts')
-export class Post {
+class Post {
   @PrimaryGeneratedColumn('increment')
   id: number;
   @Column('varchar')
@@ -25,5 +25,6 @@ export class Post {
   @ManyToOne('User', 'posts')
   author: User;
   @OneToMany('Comment', 'post')
-  comment: Comment;
+  comments: Comment[];
 }
+export {Post};
