@@ -2,12 +2,12 @@ import React from 'react';
 import {GetServerSideProps, NextPage} from 'next';
 import {useRouter} from 'next/router';
 import styled from 'styled-components';
+import {Course} from '@/DB/entity';
 import {Chapters} from '@/components/Chapters';
 import {Layout} from '@/components/Layout';
-import {Courses} from '../api/v1/getCourseCatalog';
 
 type Props = {
-  courses?: Courses;
+  courses?: Course[];
 };
 
 const ChapterItem: NextPage<Props> = ({courses}) => {
@@ -41,10 +41,10 @@ const Right = styled.div`
 `;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/v1/getCourseCatalog');
-  const {courses} = await res.json();
+  const res = await fetch('http://localhost:3000/api/Course/getAllCourses');
+  const data = await res.json();
 
   return {
-    props: {courses},
+    props: {courses: data?.courses ?? []},
   };
 };

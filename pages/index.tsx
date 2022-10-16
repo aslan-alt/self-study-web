@@ -1,11 +1,11 @@
 import React from 'react';
 import {GetServerSideProps, NextPage} from 'next';
+import {Course} from '@/DB/entity';
 import {Chapters} from '@/components/Chapters';
 import {Layout} from '@/components/Layout';
-import {Courses} from './api/v1/getCourseCatalog';
 
 type Props = {
-  courses?: Courses;
+  courses?: Course[];
 };
 
 const Home: NextPage<Props> = ({courses}) => {
@@ -21,7 +21,7 @@ const Home: NextPage<Props> = ({courses}) => {
 export default Home;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const res = await fetch('http://localhost:3000/api/v1/getCourseCatalog');
+  const res = await fetch('http://localhost:3000/api/Course/getAllCourses');
   const {courses} = await res.json();
 
   return {

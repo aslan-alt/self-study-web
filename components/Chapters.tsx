@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import {Course} from '@/DB/entity';
 import {IconButton} from '@/components/IconButton';
-import {Courses} from '../pages/api/v1/getCourseCatalog';
 
-export const Chapters: FC<{courses?: Courses}> = ({courses}) => {
+export const Chapters: FC<{courses?: Course[]}> = ({courses}) => {
   const [selectedId, setSelectedId] = useState(0);
 
   return (
