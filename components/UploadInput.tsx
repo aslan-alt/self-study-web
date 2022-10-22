@@ -1,10 +1,13 @@
 import React, {FC} from 'react';
+import {CloudUploadOutlined} from '@ant-design/icons';
 import axios from 'axios';
+import styled from 'styled-components';
 
 export const UploadInput: FC = () => {
   return (
-    <div>
-      <input
+    <Container>
+      <UploadIcon />
+      <StyledUploadInput
         type="file"
         onChange={(e) => {
           const chunkSize = 1024 * 1024;
@@ -28,6 +31,28 @@ export const UploadInput: FC = () => {
           }
         }}
       />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  position: relative;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+`;
+
+const StyledUploadInput = styled.input`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  left: 0;
+`;
+
+const UploadIcon = styled(CloudUploadOutlined)`
+  font-size: 46px;
+  color: #40a9ff;
+`;

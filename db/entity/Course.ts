@@ -9,10 +9,7 @@ import {
 } from 'typeorm';
 import {User} from '@/DB/entity/User';
 import {Video} from '@/DB/entity/Video';
-
-enum CourseType {
-  FE = 0,
-}
+import {CourseType} from '../../types/Course';
 
 @Entity('courses')
 class Course {

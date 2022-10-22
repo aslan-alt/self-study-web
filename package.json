@@ -27,6 +27,7 @@
     "update:package": "ncu -u"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@babel/cli": "^7.19.3",
     "@testing-library/user-event": "^14.4.3",
     "@types/md5": "^2.3.2",

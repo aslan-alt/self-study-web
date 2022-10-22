@@ -1,20 +1,12 @@
 import {NextApiHandler} from 'next';
 import {Course, User} from '@/DB/entity';
 import {getConnection} from '@/DB/getConnection';
-
-enum CourseType {
-  FE = 0,
-}
-export type CreateCoursesRequest = {
-  title: string;
-  type: CourseType;
-  author: string;
-};
+import {CreateCoursesRequest} from '../../../types/Course';
 
 const creatCourse: NextApiHandler = async (req, res) => {
   const {title, type, author} = req.body as CreateCoursesRequest;
   const connection = await getConnection();
-  const user = await connection.manager.findOne(User, {where: {username: author}});
+  const user = await connection.manager.findOne(User, {where: {id: author}});
 
   const course = new Course();
   course.author = user;

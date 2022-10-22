@@ -90,8 +90,8 @@ export const Header: FC = () => {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  gap: var(--cx-spacing-2x);
-  padding: 0 var(--cx-spacing-3x);
+  gap: var(--mt-spacing-2x);
+  padding: 0 var(--mt-spacing-3x);
   align-items: center;
   min-height: 56px;
 `;
@@ -104,14 +104,15 @@ const Right = styled.div`
 const SignInButton = styled.div`
   display: flex;
   align-items: center;
-  color: #065fd4;
+  color: var(--mt-button-color);
   height: 34px;
-  border: 1px solid var(--ytd-searchbox-legacy-button-border-color);
+  border: 1px solid var(--mt-searchbox-legacy-button-border-color);
   min-width: 90px;
   padding: 0 14px;
   justify-content: space-between;
-  border-radius: var(--cx-spacing-3x);
-  font-size: var(--cx-spacing-2x);
+  border-radius: var(--mt-spacing-3x);
+  font-size: var(--mt-tab-system-font-size);
+  font-weight: var(--mt-user-comment-font-weight);
   cursor: pointer;
   :hover {
     background: #def1ff;

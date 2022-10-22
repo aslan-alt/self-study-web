@@ -6,7 +6,9 @@ import {User} from '@/DB/entity';
 const SignIn: NextPage<{user: User}> = () => {
   return (
     <Container>
-      <Input />
+      <div>
+        <span>用户名</span> <Input placeholder="请输入用户名" />
+      </div>
     </Container>
   );
 };

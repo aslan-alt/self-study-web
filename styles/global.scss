@@ -27,13 +27,18 @@ body{
 }
 
 :root {
-  --cx-spacing-1x: 8px;
-  --cx-spacing-2x: 16px;
-  --cx-spacing-3x: 24px;
-  --cx-spacing-4x: 32px;
-  --ytd-searchbox-legacy-border-shadow-color: #eee;
-  --ytd-searchbox-legacy-border-color: #ccc;
-  --ytd-searchbox-legacy-button-border-color: #d3d3d3;
+  --mt-spacing-1x: 8px;
+  --mt-spacing-2x: 16px;
+  --mt-spacing-3x: 24px;
+  --mt-spacing-4x: 32px;
+  --mt-tab-system-font-size: 14px;
+  --mt-user-comment-font-weight: 400;
+  --mt-tab-system-font-weight: 500;
+  --mt-searchbox-legacy-border-shadow-color: #eee;
+  --mt-searchbox-legacy-border-color: #ccc;
+  --mt-searchbox-legacy-button-border-color: #d3d3d3;
+  --mt-spec-text-primary: #030303;
+  --mt-button-color:#065fd4;
 }
 
 
