@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import {User} from '@/DB/entity/User';
 import {Video} from '@/DB/entity/Video';
-import {CourseType} from '../../types/Course';
+import {CourseType} from '../../requests';
 
 @Entity('courses')
 class Course {
