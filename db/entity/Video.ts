@@ -19,6 +19,8 @@ class Video {
   title: string;
   @Column('varchar')
   path: string;
+  @Column('varchar')
+  imagePath: string;
   @Column('int', {default: 0})
   playCount: number;
   @ManyToOne('User', 'videos')

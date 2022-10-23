@@ -6,6 +6,7 @@ import {useRouter} from 'next/router';
 import styled from 'styled-components';
 import {Course} from '@/DB/entity';
 import {Header} from '@/components/Header';
+import {VideoForm} from '@/components/VideoForm';
 
 const {Sider} = AntdLayout;
 
@@ -39,7 +40,7 @@ export const Layout: FC<{courses?: Course[]}> = ({courses}) => {
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>{currentChapter?.title ?? ''}</Breadcrumb.Item>
           </Breadcrumb>
-          {isEmpty(videos) ? <Card>内容为空</Card> : <Card>我是内容</Card>}
+          {isEmpty(videos) ? <VideoForm /> : <Card>我是内容</Card>}
         </Content>
       </LayoutBody>
     </Container>

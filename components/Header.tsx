@@ -6,6 +6,7 @@ import {useRouter} from 'next/router';
 import styled from 'styled-components';
 import {useCreateCourse} from '../hooks/useCreateCourse';
 import {CourseType} from '../requests';
+import {registerUser} from '../requests/registerUser';
 const {Search} = Input;
 
 export const Header: FC = () => {
@@ -103,6 +104,9 @@ export const Header: FC = () => {
       <Right>
         <SignInButton type="primary" icon={<LoginOutlined />}>
           登录
+        </SignInButton>
+        <SignInButton type="primary" icon={<LoginOutlined />} onClick={registerUser}>
+          注册
         </SignInButton>
       </Right>
     </Container>

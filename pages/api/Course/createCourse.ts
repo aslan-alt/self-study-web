@@ -1,7 +1,7 @@
 import {NextApiHandler} from 'next';
 import {Course, User} from '@/DB/entity';
 import {getConnection} from '@/DB/getConnection';
-import {CreateCoursesRequest} from '../../../types/Course';
+import {CreateCoursesRequest} from '../../../requests';
 
 const creatCourse: NextApiHandler = async (req, res) => {
   const {title, type, author} = req.body as CreateCoursesRequest;

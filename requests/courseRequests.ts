@@ -1,6 +1,4 @@
-import path from 'path';
-import axios from 'axios';
-import {api, root} from './config';
+import {api, axios} from './config';
 
 export enum CourseType {
   FE = 0,
@@ -20,5 +18,5 @@ export type CreateCoursesResponse = {
 };
 
 export const createCourse = async (data: CreateCoursesRequest) => {
-  return await axios.post<CreateCoursesResponse>(path.resolve(root, api.createCourse), data);
+  return await axios.post<CreateCoursesResponse>(api.createCourse, data);
 };

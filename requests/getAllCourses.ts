@@ -1,8 +1,6 @@
-import path from 'path';
-import axios from 'axios';
 import {Course} from '@/DB/entity';
-import {api, root} from './config';
+import {api, axios} from './config';
 
 export const getAllCourses = async () => {
-  return await axios.get<{courses?: Course[]}>(path.join(root, api.getAllCourses));
+  return await axios.get<{courses?: Course[]}>(api.getAllCourses);
 };
