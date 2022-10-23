@@ -1,36 +1,60 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {AudioOutlined} from '@ant-design/icons';
-import {Input} from 'antd';
-import Image from 'next/image';
-import Link from 'next/link';
+import {PlusOutlined, LoginOutlined} from '@ant-design/icons';
+import {Button, Input, Layout, Modal} from 'antd';
+import {useRouter} from 'next/router';
 import styled from 'styled-components';
+import {useCreateCourse} from '../hooks/useCreateCourse';
+import {CourseType} from '../requests';
 const {Search} = Input;
 
-const suffix = (
-  <AudioOutlined
-    style={{
-      fontSize: 16,
-      color: '#1890ff',
-    }}
-  />
-);
 export const Header: FC = () => {
+  const router = useRouter();
+  const [chapterName, setChapterName] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const {mutateAsync: createCourse, isLoading} = useCreateCourse();
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = async () => {
+    const {data} = await createCourse({title: chapterName, type: CourseType.FE, author: 1});
+    closeModal();
+    await router.push(`/chapter/${data.id}`);
+    setChapterName('');
+  };
   return (
-    <Container data-tn="header-container">
-      <div
-        onClick={() => {
-          fetch('http://localhost:3000/api/user/registerUser', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              username: 'aslan-test1234',
-              password: '123456122',
-              passwordConfirmation: '123456122',
-            }),
-          });
-        }}
-      >
-        我的科技树
+    <Container data-tn="header-container" style={{position: 'fixed', zIndex: 1, width: '100%'}}>
+      <div>
+        <Button type="primary" icon={<PlusOutlined />} onClick={openModal}>
+          添加新章节
+        </Button>
+        <Modal
+          title="添加章节"
+          open={isModalOpen}
+          footer={[
+            <Button key="cancel" onClick={closeModal}>
+              取消
+            </Button>,
+            <Button key="submit" type="primary" loading={isLoading} onClick={handleOk}>
+              创建
+            </Button>,
+          ]}
+          onOk={handleOk}
+          onCancel={closeModal}
+        >
+          <Input
+            placeholder="请输入章节名"
+            value={chapterName}
+            onChange={(e) => {
+              setChapterName(e.target.value);
+            }}
+          />
+        </Modal>
       </div>
       {/*<div*/}
       {/*  onClick={() => {*/}
@@ -66,34 +90,33 @@ export const Header: FC = () => {
         placeholder="input search text"
         enterButton="Search"
         size="large"
-        suffix={suffix}
+        suffix={
+          <AudioOutlined
+            style={{
+              fontSize: 16,
+              color: '#1890ff',
+            }}
+          />
+        }
         onSearch={() => {}}
       />
       <Right>
-        <Link href={`/signIn`}>
-          <SignInButton>
-            <Image
-              data-tn="header-icon-user"
-              src="/user.svg"
-              width={24}
-              height={24}
-              alt="userIcon"
-            />
-            登录
-          </SignInButton>
-        </Link>
+        <SignInButton type="primary" icon={<LoginOutlined />}>
+          登录
+        </SignInButton>
       </Right>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled(Layout.Header)`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: var(--mt-spacing-2x);
   padding: 0 var(--mt-spacing-3x);
   align-items: center;
-  min-height: 56px;
+  background: var(--mt-theme-background-color);
+  box-shadow: 0 2px 4px 0 var(--mt-color-shadow);
 `;
 
 const Right = styled.div`
@@ -101,20 +124,6 @@ const Right = styled.div`
   justify-content: end;
 `;
 
-const SignInButton = styled.div`
-  display: flex;
-  align-items: center;
-  color: var(--mt-button-color);
-  height: 34px;
-  border: 1px solid var(--mt-searchbox-legacy-button-border-color);
-  min-width: 90px;
-  padding: 0 14px;
-  justify-content: space-between;
+const SignInButton = styled(Button)`
   border-radius: var(--mt-spacing-3x);
-  font-size: var(--mt-tab-system-font-size);
-  font-weight: var(--mt-user-comment-font-weight);
-  cursor: pointer;
-  :hover {
-    background: #def1ff;
-  }
 `;

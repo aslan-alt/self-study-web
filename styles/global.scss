@@ -24,6 +24,8 @@ ul,li {
 body{
   font-family: $font-hei;
   font-size: 16px;
+  height: 100vh;
+  width: 100vw;
 }
 
 :root {
@@ -39,7 +41,8 @@ body{
   --mt-searchbox-legacy-button-border-color: #d3d3d3;
   --mt-spec-text-primary: #030303;
   --mt-button-color:#065fd4;
-  --mt-spec-text-primary: #030303;
+  --mt-theme-background-color: #fff;
+  --mt-color-shadow:#E1E1E1;
 }
 
 
