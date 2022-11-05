@@ -54,7 +54,7 @@ export const VideoDetailInfo: FC<Props> = ({videoNameAndDescribe, setVideoTitleA
       </Typography.Text>
       <UploadAndPreview>
         {isUndefined(image) ? (
-          <UploadImageWrpaer>
+          <UploadImageWrapper>
             <StyledUploadImag icon={<UploadImagIcon />} type="dashed" />
             <UploadInput
               type="file"
@@ -74,7 +74,7 @@ export const VideoDetailInfo: FC<Props> = ({videoNameAndDescribe, setVideoTitleA
                 }
               }}
             />
-          </UploadImageWrpaer>
+          </UploadImageWrapper>
         ) : (
           <PreviewContainer>
             <Image
@@ -103,7 +103,7 @@ export const VideoDetailInfo: FC<Props> = ({videoNameAndDescribe, setVideoTitleA
   );
 };
 
-const UploadImageWrpaer = styled.div`
+const UploadImageWrapper = styled.div`
   position: relative;
   width: 260px;
   height: 140px;

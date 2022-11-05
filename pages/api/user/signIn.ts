@@ -1,5 +1,6 @@
 import {NextApiHandler} from 'next';
 import {SignIn} from '@/DB/validation/SignInValidation';
+import {withSessionRoute} from '@/lib/withSession';
 
 export type SignInRequest = {
   username: string;
@@ -15,10 +16,12 @@ const signIn: NextApiHandler = async (req, res) => {
 
   await signInValidation.validate();
   if (signInValidation.hasErrors()) {
-    res.status(401).json({status: 'faild', error: signInValidation.errors});
+    res.status(401).json({status: 'Login failed', error: signInValidation.errors});
   } else {
+    req.session.user = signInValidation.user;
+    await req.session.save();
     res.status(200).json({data: '登陆成功'});
   }
 };
 
-export default signIn;
+export default withSessionRoute(signIn);

@@ -5,7 +5,8 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/constants/*": ["constants/*"],
-      "@/DB/*": ["db/*"]
+      "@/DB/*": ["db/*"],
+      "@/lib/*": ["lib/*"]
     },
     "target": "es5",
     "module": "esnext",

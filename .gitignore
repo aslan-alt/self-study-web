@@ -35,3 +35,5 @@ yarn-error.log*
 .env.production.local
 .e2e_output
 
+next-env.d.ts
+

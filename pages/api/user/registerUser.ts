@@ -1,12 +1,13 @@
 import {NextApiHandler} from 'next';
 import {User} from '@/DB/entity';
 import {getConnection} from '@/DB/getConnection';
+import {withSessionRoute} from '@/lib/withSession';
 
-export interface RegisterUserRequest {
+export type RegisterUserRequest = {
   username: string;
   password: string;
   passwordConfirmation: string;
-}
+};
 
 const registerUser: NextApiHandler = async (req, res) => {
   const {username, password, passwordConfirmation} = req.body as RegisterUserRequest;
@@ -35,4 +36,4 @@ const registerUser: NextApiHandler = async (req, res) => {
   }
 };
 
-export default registerUser;
+export default withSessionRoute(registerUser);
