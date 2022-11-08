@@ -4,22 +4,17 @@ import {Button, Typography, notification} from 'antd';
 import styled from 'styled-components';
 import {Course} from '@/DB/entity';
 import {UploadInput} from '@/components/UploadInput';
-import {VideoDetailInfo, VideoNameAndDescribe} from '@/components/VideoDetailInfo';
-import {chunkSize} from '@/constants/index';
-import {mergeSlices} from '../requests/mergeSlices';
-import {uploadVideo} from '../requests/uploadVideo';
+import {VideoDetailInfo} from '@/components/VideoDetailInfo';
 
 type Props = {
   course?: Course;
 };
 
 export const VideoForm: FC<Props> = ({course}) => {
-  const [video, setVideo] = useState<File>();
-  const [videoNameAndDescribe, setVideoTitleAndDescribe] = useState<VideoNameAndDescribe>();
+  const [videoFile, setVideoFile] = useState<File>();
 
   const clearVideoState = () => {
-    setVideo(undefined);
-    setVideoTitleAndDescribe(undefined);
+    setVideoFile(undefined);
   };
 
   useEffect(() => {
@@ -28,11 +23,8 @@ export const VideoForm: FC<Props> = ({course}) => {
 
   return (
     <>
-      {video ? (
-        <VideoDetailInfo
-          videoNameAndDescribe={videoNameAndDescribe}
-          setVideoTitleAndDescribe={setVideoTitleAndDescribe}
-        />
+      {videoFile ? (
+        <VideoDetailInfo course={course} videoFile={videoFile} />
       ) : (
         <Container>
           <UploadIcon />
@@ -48,25 +40,9 @@ export const VideoForm: FC<Props> = ({course}) => {
                   message: '类型错误',
                   description: '目前只支持MP4格式的视频哦.',
                 });
-              } else {
-                const spliceNumber = Math.round(file.size / chunkSize);
-                const [fileName, suffix] = file.name.split('.');
-                const uploadRequests = Array.from(new Array(spliceNumber).keys()).map((start) => {
-                  return new Promise((resolve, reject) => {
-                    const formData = new FormData();
-                    const blobName = `${fileName}-${start}.${suffix}`;
-                    const blob = file.slice(start * chunkSize, (start + 1) * chunkSize);
-
-                    formData.append('file', new File([blob], blobName, {type: 'video/mp4'}));
-                    uploadVideo(formData).then(resolve, reject);
-                  });
-                });
-                Promise.all(uploadRequests).then(() =>
-                  mergeSlices({fileName, courseId: course.id})
-                );
-                setVideo(file);
-                setVideoTitleAndDescribe({name: file.name?.replace('.mp4', '')});
+                return;
               }
+              setVideoFile(file);
             }}
           />
         </Container>

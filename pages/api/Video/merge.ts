@@ -23,25 +23,24 @@ const mergeSlices: NextApiHandler = async (req, res) => {
   video.title = fileName;
   video.course = course;
   video.author = req.session.user;
-  video.path = path.join(videoUploadDir, fileName);
+  video.path = path.join(videoUploadDir, `${fileName}_${new Date().getTime()}`);
   await connection.getRepository(Video).save(video);
 
-  const needMergeFilePath = path.join(videoUploadDir, fileName);
-  const chunks = await fse.readdir(needMergeFilePath);
+  const videoChunksDir = path.join(videoUploadDir, fileName);
+
+  const chunks = await fse.readdir(videoChunksDir);
   try {
     chunks
       .sort((a, b) => {
-        const [aIndex] = a.split('.');
-        const [bIndex] = b.split('.');
-        return Number(aIndex) - Number(bIndex);
+        return Number(a.split('.')[0]) - Number(b.split('.')[0]);
       })
       .map((chunkPath) => {
         fs.appendFileSync(
-          needMergeFilePath + '.mp4',
-          fs.readFileSync(path.join(needMergeFilePath, chunkPath))
+          `${video.path}.mp4`,
+          fs.readFileSync(path.join(videoChunksDir, chunkPath))
         );
       });
-    fse.removeSync(needMergeFilePath);
+    fse.removeSync(videoChunksDir);
     res.status(200).json({status: 'success'});
   } catch (error) {
     res.status(500).json({status: 'failed', error});
