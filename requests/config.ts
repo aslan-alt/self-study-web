@@ -11,4 +11,3 @@ export const api = {
   mergeSlices: '/api/Video/merge',
   login: 'api/user/signIn',
 };
-export {axios};

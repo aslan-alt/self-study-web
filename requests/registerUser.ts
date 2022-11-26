@@ -1,4 +1,5 @@
-import {axios, api} from './config';
+import axios from 'axios';
+import {api} from './config';
 
 export const registerUser = async () => {
   return await axios.post(api.registerUser, {
