@@ -2,11 +2,13 @@ import React, {FC, useMemo, useState} from 'react';
 import {FolderAddOutlined, DeleteOutlined} from '@ant-design/icons';
 import {Button, Typography, Image, notification, Card} from 'antd';
 import {isUndefined} from 'lodash';
+import {useRouter} from 'next/router';
 import styled from 'styled-components';
 import {Course, Image as ImageType} from '@/DB/entity';
 import {TitleInput} from '@/components/TitleInput';
 import {UploadInput} from '@/components/UploadInput';
 import {useMultipartUpload} from '../hooks/multipartUpload';
+import {useGetVideos} from '../hooks/useGetVideos';
 import {uploadImage} from '../requests/uploadImage';
 
 type Props = {
@@ -20,11 +22,14 @@ type VideoNameAndDescribe = {
 };
 
 export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
+  const router = useRouter();
+  const selectedId = String(router.query.id);
   const [videoNameAndDescribe, setVideoTitleAndDescribe] = useState<VideoNameAndDescribe>({
     name: videoFile.name.replace('.mp4', ''),
   });
 
-  const {mutate: multipartUpload, isLoading} = useMultipartUpload(course?.id);
+  const {mutateAsync: multipartUpload, isLoading} = useMultipartUpload(course?.id);
+  const {refetch: refetchVideos} = useGetVideos(selectedId);
 
   const [image, setImage] = useState<ImageType>();
   const url = useMemo(() => window.webkitURL.createObjectURL(videoFile), [videoFile]);
@@ -112,8 +117,9 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
           <Button
             type="primary"
             loading={isLoading}
-            onClick={() => {
-              multipartUpload(videoFile);
+            onClick={async () => {
+              await multipartUpload(videoFile);
+              await refetchVideos();
             }}
           >
             上传

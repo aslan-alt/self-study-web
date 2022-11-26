@@ -20,6 +20,6 @@ export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({req
   const user = req.session.user;
   const res = await getAllCourses();
   return {
-    props: {courses: res.data?.courses ?? [], ...(user && user)},
+    props: {courses: res.data?.courses ?? [], user: user ?? {}},
   };
 });

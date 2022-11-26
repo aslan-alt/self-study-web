@@ -15,7 +15,7 @@ const {Sider} = AntdLayout;
 
 const leftWidth = 240;
 
-export const Layout: FC<{courses?: Course[]; user?: User}> = ({courses}) => {
+export const Layout: FC<{courses?: Course[]; user?: User}> = ({courses, user}) => {
   const router = useRouter();
   const selectedId = String(router.query.id ?? 1);
 
@@ -44,7 +44,7 @@ export const Layout: FC<{courses?: Course[]; user?: User}> = ({courses}) => {
 
   return (
     <Container>
-      <Header openModal={openModal} />
+      <Header openModal={openModal} isLogin={!isEmpty(user)} />
       <Polyfill />
 
       <AntdLayout>

@@ -1,15 +1,15 @@
 import {NextApiHandler} from 'next';
-import {Course, User} from '@/DB/entity';
+import {Course} from '@/DB/entity';
 import {getConnection} from '@/DB/getConnection';
+import {withSessionRoute} from '@/lib/withSession';
 import {CreateCoursesRequest} from '../../../requests';
 
 const creatCourse: NextApiHandler = async (req, res) => {
-  const {title, type, author} = req.body as CreateCoursesRequest;
+  const {title, type} = req.body as CreateCoursesRequest;
   const connection = await getConnection();
-  const user = await connection.manager.findOne(User, {where: {id: author}});
 
   const course = new Course();
-  course.author = user;
+  course.author = req.session.user;
   course.type = type;
   course.title = title;
   // const videos = new Video();
@@ -25,4 +25,4 @@ const creatCourse: NextApiHandler = async (req, res) => {
   res.status(200).json(course);
 };
 
-export default creatCourse;
+export default withSessionRoute(creatCourse);

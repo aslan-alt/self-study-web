@@ -1,23 +1,25 @@
 import React, {FC} from 'react';
 import {AudioOutlined} from '@ant-design/icons';
-import {PlusOutlined, LoginOutlined} from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
 import {Button, Input, Layout} from 'antd';
 import styled from 'styled-components';
 import {login} from '../requests/login';
-import {registerUser} from '../requests/registerUser';
 const {Search} = Input;
 
 type Props = {
   openModal: () => void;
+  isLogin: boolean;
 };
 
-export const Header: FC<Props> = ({openModal}) => {
+export const Header: FC<Props> = ({openModal, isLogin}) => {
   return (
     <Container data-tn="header-container" style={{position: 'fixed', zIndex: 1, width: '100%'}}>
       <div>
-        <Button type="primary" icon={<PlusOutlined />} onClick={openModal}>
-          添加新章节
-        </Button>
+        {isLogin && (
+          <Button type="primary" icon={<PlusOutlined />} onClick={openModal}>
+            添加新章节
+          </Button>
+        )}
       </div>
       <Search
         placeholder="input search text"
@@ -34,21 +36,21 @@ export const Header: FC<Props> = ({openModal}) => {
         onSearch={() => {}}
       />
       <Right>
-        <SignInButton
-          type="primary"
-          icon={<LoginOutlined />}
-          onClick={() => {
-            login({
-              username: 'aslan-test1234',
-              password: '123456122',
-            });
-          }}
-        >
-          登录
-        </SignInButton>
-        <SignInButton type="primary" icon={<LoginOutlined />} onClick={registerUser}>
-          注册
-        </SignInButton>
+        {isLogin ? (
+          <SignInButton>注销</SignInButton>
+        ) : (
+          <SignInButton
+            type="primary"
+            onClick={() => {
+              login({
+                username: 'aslan-test1234',
+                password: '123456122',
+              });
+            }}
+          >
+            登录 ｜注册
+          </SignInButton>
+        )}
       </Right>
     </Container>
   );
