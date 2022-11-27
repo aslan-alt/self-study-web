@@ -17,9 +17,9 @@ const leftWidth = 240;
 
 export const Layout: FC<{courses?: Course[]; user?: User}> = ({courses, user}) => {
   const router = useRouter();
-  const selectedId = String(router.query.id ?? 1);
+  const selectedId = String(router?.query?.id ?? 1);
 
-  const course = courses.find((item) => String(item.id) === selectedId);
+  const course = courses?.find((item) => String(item.id) === selectedId);
 
   const [chapterName, setChapterName] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);

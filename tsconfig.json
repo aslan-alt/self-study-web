@@ -8,9 +8,12 @@
       "@/DB/*": ["db/*"],
       "@/lib/*": ["lib/*"]
     },
-    "target": "es5",
-    "module": "esnext",
-    "strict": false,
+    "jsx": "preserve",
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
+    "sourceMap": true,
+    "noImplicitReturns": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,7 +26,6 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
     "incremental": true
   },
   "exclude": [

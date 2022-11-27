@@ -7,7 +7,7 @@ import {UploadInput} from '@/components/UploadInput';
 import {VideoDetailInfo} from '@/components/VideoDetailInfo';
 
 type Props = {
-  course?: Course;
+  course: Course;
 };
 
 export const VideoForm: FC<Props> = ({course}) => {

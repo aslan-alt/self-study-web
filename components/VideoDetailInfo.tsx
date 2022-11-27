@@ -12,8 +12,8 @@ import {useGetVideos} from '../hooks/useGetVideos';
 import {uploadImage} from '../requests/uploadImage';
 
 type Props = {
-  course?: Course;
-  videoFile?: File;
+  course: Course;
+  videoFile: File;
 };
 
 type VideoNameAndDescribe = {
@@ -25,7 +25,7 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
   const router = useRouter();
   const selectedId = String(router.query.id);
   const [videoNameAndDescribe, setVideoTitleAndDescribe] = useState<VideoNameAndDescribe>({
-    name: videoFile.name.replace('.mp4', ''),
+    name: videoFile?.name.replace('.mp4', ''),
   });
 
   const {mutateAsync: multipartUpload} = useMultipartUpload(course?.id);
@@ -41,7 +41,7 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
         <TitleInput
           title="标题（必填)"
           placeholder="添加一个可描述您视频的标题"
-          value={videoNameAndDescribe?.name}
+          value={videoNameAndDescribe?.name ?? ''}
           onChange={(e) => {
             setVideoTitleAndDescribe((videoInfo) => ({
               ...videoInfo,
@@ -52,7 +52,7 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
         />
         <TitleInput
           title="说明"
-          value={videoNameAndDescribe?.description}
+          value={videoNameAndDescribe?.description ?? ''}
           onChange={(e) => {
             setVideoTitleAndDescribe((videoInfo) => ({
               ...videoInfo,
