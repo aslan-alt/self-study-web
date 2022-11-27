@@ -1,9 +1,9 @@
 import {render, screen} from '@testing-library/react';
-import Home from '../pages';
+import {Layout} from '@/components/Layout';
 
-describe('<Home />', () => {
+describe('<Layout />', () => {
   it('should render Home', () => {
-    render(<Home />);
+    render(<Layout />);
 
     expect(screen.getByTestId('home-container')).toBeInTheDocument();
   });

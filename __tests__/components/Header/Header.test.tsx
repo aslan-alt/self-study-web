@@ -3,7 +3,7 @@ import {Header} from '@/components/Header';
 
 describe('<Header />', () => {
   it('should render Header and searchInput', () => {
-    render(<Header />);
+    render(<Header openModal={jest.fn()} isLogin={false} />);
     expect(screen.getByText('我的科技树')).toBeInTheDocument();
 
     expect(screen.getByPlaceholderText('search')).toBeInTheDocument();
