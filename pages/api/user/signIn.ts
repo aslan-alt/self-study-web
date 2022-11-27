@@ -18,8 +18,10 @@ const signIn: NextApiHandler = async (req, res) => {
   if (signInValidation.hasErrors()) {
     res.status(401).json({status: 'Login failed', error: signInValidation.errors});
   } else {
-    req.session.user = signInValidation.user;
-    await req.session.save();
+    if (signInValidation.user) {
+      req.session.user = signInValidation.user;
+      await req.session.save();
+    }
     res.status(200).json({data: '登陆成功'});
   }
 };

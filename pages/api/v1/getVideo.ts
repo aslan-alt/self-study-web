@@ -9,7 +9,7 @@ const getVideo: NextApiHandler = async (req, res) => {
 
   if (range) {
     const stats = await fs.promises.stat(needMergeFilePath);
-    const [, rangeStart, rangeEnd] = range.match(/=(\d+)-(\d+)?/);
+    const [, rangeStart, rangeEnd] = range.match(/=(\d+)-(\d+)?/) ?? [];
 
     const start = parseInt(rangeStart, 10);
     let end = rangeEnd ? parseInt(rangeEnd, 10) : start + 1024 * 1024;

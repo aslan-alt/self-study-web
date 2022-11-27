@@ -13,25 +13,25 @@ import {User} from './User';
 @Entity('comments')
 class Comment {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('int')
-  userId: number;
+  userId?: number;
   @Column('varchar')
-  nickname: string;
+  nickname?: string;
   @Column('int')
-  postId: number;
+  postId?: number;
   @Column('text')
-  content: string;
+  content?: string;
   @ManyToOne('User', 'comments')
-  user: User;
+  user?: User;
   @ManyToOne('Post', 'comments')
-  post: Post;
+  post?: Post;
   @ManyToOne('Video', 'comments')
-  video: Video;
+  video?: Video;
   @CreateDateColumn({type: 'timestamp', name: 'createdAt', nullable: false})
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
-  updateAt: Date;
+  updateAt?: Date;
 }
 
 export {Comment};

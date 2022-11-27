@@ -3,7 +3,7 @@ import {chunkSize} from '@/constants/index';
 import {mergeSlices} from '../requests/mergeSlices';
 import {uploadVideo} from '../requests/uploadVideo';
 
-export const useMultipartUpload = (courseId: number) => {
+export const useMultipartUpload = (courseId?: number) => {
   return useMutation(async (videoFile: File) => {
     const [fileName, suffix] = videoFile.name.split('.');
     const uploadRequests = Array.from(new Array(Math.round(videoFile.size / chunkSize)).keys()).map(

@@ -14,18 +14,18 @@ import {CourseType} from '../../requests';
 @Entity('courses')
 class Course {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('int')
-  type: CourseType;
+  type?: CourseType;
   @Column('varchar')
-  title: string;
+  title?: string;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
-  updatedAt: Date;
+  updatedAt?: Date;
   @ManyToOne('User', 'courses')
-  author: User;
+  author?: User;
   @OneToMany('Video', 'course')
-  videos: Video[];
+  videos?: Video[];
 }
 export {Course};

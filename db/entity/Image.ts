@@ -3,14 +3,14 @@ import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColu
 @Entity('images')
 class Image {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('varchar')
-  name: string;
+  name?: string;
   @Column('varchar')
-  path: string;
+  path?: string;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 export {Image};

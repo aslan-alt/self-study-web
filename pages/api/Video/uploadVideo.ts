@@ -29,11 +29,11 @@ const Upload: NextApiHandler = async (req, res) => {
     });
 
     form.on('file', (name, chunk) => {
-      const chunkDir = `${videoUploadDir}/${chunk.originalFilename.split('-')[0]}`;
+      const chunkDir = `${videoUploadDir}/${chunk.originalFilename?.split('-')[0] ?? ''}`;
       if (!fse.existsSync(chunkDir)) {
         fse.mkdirSync(chunkDir);
       }
-      fse.move(chunk.filepath, path.join(chunkDir, chunk.originalFilename.split('-')[1]));
+      fse.move(chunk.filepath, path.join(chunkDir, chunk.originalFilename?.split('-')[1] ?? ''));
       res.status(200).json({chunkDir});
       resolve('Uploaded successfully');
     });

@@ -14,24 +14,24 @@ import {Comment} from './Comment';
 @Entity('videos')
 class Video {
   @PrimaryGeneratedColumn('increment')
-  id: number;
+  id?: number;
   @Column('varchar')
-  title: string;
+  title?: string;
   @Column('varchar')
-  path: string;
+  path?: string;
   @Column('varchar')
-  imagePath: string;
+  imagePath?: string;
   @Column('int', {default: 0})
-  playCount: number;
+  playCount?: number;
   @ManyToOne('User', 'videos')
-  author: User;
+  author?: User;
   @OneToMany('Comment', 'video')
-  comments: Comment[];
+  comments?: Comment[];
   @ManyToOne('Course', 'videos')
-  course: Course;
+  course?: Course;
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
   @UpdateDateColumn({type: 'timestamp', name: 'updatedAt'})
-  updatedAt: Date;
+  updatedAt?: Date;
 }
 export {Video};

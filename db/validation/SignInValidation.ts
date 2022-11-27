@@ -3,12 +3,12 @@ import {User} from '@/DB/entity/User';
 import {getConnection} from '@/DB/getConnection';
 
 export class SignIn {
-  username: string;
-  password: string;
-  user: User;
+  username?: string;
+  password?: string;
+  user: User | null = null;
   errors = {username: [] as string[], password: [] as string[]};
   async validate() {
-    if (this.username.trim() === '') {
+    if (this?.username?.trim() === '') {
       this.errors.username.push('');
     }
     const connection = await getConnection();
@@ -20,7 +20,7 @@ export class SignIn {
     }
     this.user = user;
     if (user) {
-      if (user.passwordDigest !== md5(this.password)) {
+      if (user.passwordDigest !== md5(this?.password ?? '')) {
         this.errors.password.push('密码与用户名不匹配');
       }
     } else {

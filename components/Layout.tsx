@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Layout as AntdLayout, Menu, Breadcrumb, Card, Typography, Button, Input, Modal} from 'antd';
+import type {MenuProps} from 'antd';
 import {isEmpty} from 'lodash';
 import Link from 'next/link';
 import {useRouter} from 'next/router';
@@ -53,12 +54,14 @@ export const Layout: FC<{courses?: Course[]; user?: User}> = ({courses, user}) =
             mode="inline"
             selectedKeys={[selectedId]}
             style={{height: '100%', borderRight: 0}}
-            items={courses?.map((chapter) => {
-              return {
-                key: chapter.id,
-                label: <Link href={`/chapter/${chapter.id}`}>{chapter.title}</Link>,
-              };
-            })}
+            items={
+              courses?.map((chapter) => {
+                return {
+                  key: chapter.id,
+                  label: <Link href={`/chapter/${chapter.id}`}>{chapter.title}</Link>,
+                };
+              }) as MenuProps['items']
+            }
           />
         </Left>
         <Content style={{padding: '0 24px 24px'}}>

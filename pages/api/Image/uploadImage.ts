@@ -32,9 +32,9 @@ const uploadImage: NextApiHandler = async (req, res) => {
 
   form.on('file', async (name, chunk) => {
     const image = new Image();
-    const imagePath = path.join(imageUploadDir, chunk.originalFilename);
+    const imagePath = path.join(imageUploadDir, chunk.originalFilename ?? '');
     image.path = imagePath;
-    image.name = chunk.originalFilename;
+    image.name = chunk.originalFilename ?? '';
     const courseRepository = await connection.getRepository(Image);
     await courseRepository.save(image);
 
