@@ -18,8 +18,8 @@ export default Home;
 
 export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({req}) => {
   const user = req.session.user;
-  const res = await getAllCourses();
+  const data = await getAllCourses();
   return {
-    props: {courses: res.data?.courses ?? [], user: user ?? {}},
+    props: {courses: data?.courses ?? [], user: user ?? {}},
   };
 });

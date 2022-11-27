@@ -1,7 +1,9 @@
-import axios from 'axios';
 import {Course} from '@/DB/entity';
 import {api} from './config';
 
 export const getAllCourses = async () => {
-  return await axios.get<{courses?: Course[]}>(api.getAllCourses);
+  // TODO: replace fetch with axios
+  return await fetch('http://localhost:3000' + api.getAllCourses).then((res) => {
+    return (res.json() ?? {}) as {courses?: Course[]};
+  });
 };

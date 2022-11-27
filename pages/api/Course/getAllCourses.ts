@@ -6,7 +6,7 @@ const getAllCourses: NextApiHandler = async (req, res) => {
   const connection = await getConnection();
   try {
     const courses = await connection.getRepository(Course).find();
-    res.status(200).json({courses});
+    res.status(200).json({courses: JSON.parse(JSON.stringify(courses))});
   } catch (error) {
     res.status(500).json({error, message: 'Failed to get data'});
   }

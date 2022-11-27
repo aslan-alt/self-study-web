@@ -28,8 +28,9 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
     name: videoFile.name.replace('.mp4', ''),
   });
 
-  const {mutateAsync: multipartUpload, isLoading} = useMultipartUpload(course?.id);
+  const {mutateAsync: multipartUpload} = useMultipartUpload(course?.id);
   const {refetch: refetchVideos} = useGetVideos(selectedId);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [image, setImage] = useState<ImageType>();
   const url = useMemo(() => window.webkitURL.createObjectURL(videoFile), [videoFile]);
@@ -118,8 +119,10 @@ export const VideoDetailInfo: FC<Props> = ({course, videoFile}) => {
             type="primary"
             loading={isLoading}
             onClick={async () => {
+              setIsLoading(true);
               await multipartUpload(videoFile);
               await refetchVideos();
+              setIsLoading(false);
             }}
           >
             上传
@@ -175,9 +178,8 @@ const DeleteButton = styled.div`
 `;
 
 const Footer = styled.div`
-  display: grid;
-  grid-template-columns: 64px;
-  justify-content: end;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const Video = styled.video`
