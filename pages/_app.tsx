@@ -2,10 +2,13 @@ import React from 'react';
 import type {AppProps} from 'next/app';
 import Head from 'next/head';
 import 'styles/global.scss';
+import {QueryClient, QueryClientProvider} from 'react-query';
+
+const queryClient = new QueryClient();
 
 export default function App({Component, pageProps}: AppProps) {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Head>
         <title>我的科技树</title>
         <link rel="icon" href="/favicon.ico" />
@@ -15,6 +18,6 @@ export default function App({Component, pageProps}: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
-    </>
+    </QueryClientProvider>
   );
 }

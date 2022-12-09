@@ -1,10 +1,23 @@
+import React from 'react';
 import {render, screen} from '@testing-library/react';
+import {useRouter} from 'next/router';
+import {TestWrapper} from '@/lib/testHelper';
 import Home from '../pages';
 
-describe('<Home />', () => {
-  it('should render Home', () => {
-    render(<Home />);
+jest.mock('next/router', () => ({
+  __esModule: true,
+  useRouter: jest.fn(),
+}));
 
-    expect(screen.getByTestId('home-container')).toBeInTheDocument();
+describe('<Layout />', () => {
+  it('should render Home', () => {
+    (useRouter as jest.Mock).mockReturnValue({query: {}});
+    render(
+      <TestWrapper>
+        <Home />
+      </TestWrapper>
+    );
+
+    expect(screen.getByTestId('header-container')).toBeInTheDocument();
   });
 });

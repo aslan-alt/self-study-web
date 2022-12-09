@@ -13,6 +13,8 @@ const customJestConfig = {
   moduleDirectories: ['node_modules', 'test-utils'],
   moduleNameMapper: {
     '^@/components/(.*)$': '<rootDir>/components/$1',
+    '^@/constants/(.*)$': '<rootDir>/constants/$1',
+    '^@/lib/(.*)$': '<rootDir>/lib/$1',
   },
   testEnvironment: 'jest-environment-jsdom',
   testMatch: ['<rootDir>/__tests__/**/*.test.tsx'],

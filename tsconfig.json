@@ -4,29 +4,28 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/constants/*": ["constants/*"]
+      "@/constants/*": ["constants/*"],
+      "@/DB/*": ["db/*"],
+      "@/lib/*": ["lib/*"]
     },
-    "target": "es5",
-    "module": "esnext",
-    "strict": false,
+    "jsx": "preserve",
+    "target": "es2018",
+    "module": "commonjs",
+    "strict": true,
+    "sourceMap": true,
+    "noImplicitReturns": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "types": ["cypress","node"],
-    "lib": [
-      "es5",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noEmit": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve",
     "incremental": true
   },
   "exclude": [

@@ -1,62 +1,69 @@
 import React, {FC} from 'react';
-import Image from 'next/image';
+import {AudioOutlined} from '@ant-design/icons';
+import {PlusOutlined} from '@ant-design/icons';
+import {Button, Input, Layout} from 'antd';
 import styled from 'styled-components';
-import {IconButton} from './IconButton';
+import {login} from '../requests/login';
+const {Search} = Input;
 
-export const Header: FC = () => {
+type Props = {
+  openModal: () => void;
+  isLogin: boolean;
+};
+
+export const Header: FC<Props> = ({openModal, isLogin}) => {
   return (
-    <Container data-tn="header-container">
-      <div>广告位</div>
-      <SearchWrapper>
-        <SearchInput type="text" placeholder="输入课程名称" />
-        <SearchButton>
-          <IconButton data-tn="header-icon-search" iconName="search" size={20} />
-        </SearchButton>
-      </SearchWrapper>
+    <Container data-tn="header-container" style={{position: 'fixed', zIndex: 1, width: '100%'}}>
+      <div>
+        {isLogin && (
+          <Button type="primary" icon={<PlusOutlined />} onClick={openModal}>
+            添加新章节
+          </Button>
+        )}
+      </div>
+      <Search
+        placeholder="input search text"
+        enterButton="Search"
+        size="large"
+        suffix={
+          <AudioOutlined
+            style={{
+              fontSize: 16,
+              color: '#1890ff',
+            }}
+          />
+        }
+        onSearch={() => {}}
+      />
       <Right>
-        <SignInButton>
-          <Image data-tn="header-icon-user" src="/user.svg" width={24} height={24} alt="userIcon" />
-          登录
-        </SignInButton>
+        {isLogin ? (
+          <SignInButton>注销</SignInButton>
+        ) : (
+          <SignInButton
+            type="primary"
+            onClick={() => {
+              login({
+                username: 'aslan-test1234',
+                password: '123456122',
+              });
+            }}
+          >
+            登录 ｜注册
+          </SignInButton>
+        )}
       </Right>
     </Container>
   );
 };
 
-const SearchWrapper = styled.div`
-  border-radius: var(--cx-spacing-1x);
-  display: flex;
-  padding: 4px;
-  :hover {
-    background: #fff;
-  }
-`;
-const SearchInput = styled.input`
-  flex: 1;
-  outline: none;
-  background: transparent;
-  padding-left: var(--cx-spacing-1x);
-  border: 1px solid var(--ytd-searchbox-legacy-border-color);
-  box-shadow: inset 0 1px 2px var(--ytd-searchbox-legacy-border-shadow-color);
-`;
-
-const SearchButton = styled.button`
-  width: 62px;
-  height: 40px;
-  background: transparent;
-  border: 1px solid var(--ytd-searchbox-legacy-button-border-color);
-  img {
-    fill: green;
-  }
-`;
-
-const Container = styled.div`
+const Container = styled(Layout.Header)`
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  gap: var(--cx-spacing-2x);
-  padding: 0 var(--cx-spacing-3x);
+  gap: var(--mt-spacing-2x);
+  padding: 0 var(--mt-spacing-3x);
   align-items: center;
-  min-height: 56px;
+  background: var(--mt-theme-background-color);
+  box-shadow: 0 2px 4px 0 var(--mt-color-shadow);
 `;
 
 const Right = styled.div`
@@ -64,19 +71,6 @@ const Right = styled.div`
   justify-content: end;
 `;
 
-const SignInButton = styled.div`
-  display: flex;
-  align-items: center;
-  color: #065fd4;
-  height: 34px;
-  border: 1px solid var(--ytd-searchbox-legacy-button-border-color);
-  min-width: 90px;
-  padding: 0 14px;
-  justify-content: space-between;
-  border-radius: var(--cx-spacing-3x);
-  font-size: var(--cx-spacing-2x);
-  cursor: pointer;
-  :hover {
-    background: #def1ff;
-  }
+const SignInButton = styled(Button)`
+  border-radius: var(--mt-spacing-3x);
 `;

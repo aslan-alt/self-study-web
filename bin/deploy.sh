@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
 
-git pull &&
 #yarn build
 #yarn typeorm:build
 #yarn migration:run

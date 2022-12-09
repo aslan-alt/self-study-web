@@ -1,54 +1,25 @@
 import React from 'react';
-import axios from 'axios';
 import {GetServerSideProps, NextPage} from 'next';
+import {Course, User} from '@/DB/entity';
 import {Layout} from '@/components/Layout';
+import {withSessionSsr} from '@/lib/withSession';
+import {getAllCourses} from '../requests/getAllCourses';
 
 type Props = {
-  userInfo?: {};
+  courses?: Course[];
+  user?: User;
 };
 
-const Home: NextPage<Props> = () => {
-  return (
-    <Layout
-      data-tn="home-container"
-      rightContent={
-        <div>
-          <input
-            type="file"
-            onChange={(e) => {
-              const chunkSize = 1024 * 1024;
-              const file = e?.target?.files?.[0];
-              if (file) {
-                const spliceNumber = Math.round(file.size / chunkSize);
-                const [fileName, suffix] = file.name.split('.');
-                const uploadRequests = Array.from(new Array(spliceNumber).keys()).map((start) => {
-                  return new Promise((resolve, reject) => {
-                    const formData = new FormData();
-                    const blobName = `${fileName}-${start}.${suffix}`;
-                    const blob = file.slice(start * chunkSize, (start + 1) * chunkSize);
-
-                    formData.append('file', new File([blob], blobName, {type: 'video/mp4'}));
-                    axios.post('/api/v1/upload', formData).then(resolve, reject);
-                  });
-                });
-                Promise.all(uploadRequests).then(() =>
-                  axios.post('/api/v1/merge', {chunkDir: fileName})
-                );
-              }
-            }}
-          />
-        </div>
-      }
-    />
-  );
+const Home: NextPage<Props> = (props) => {
+  return <Layout {...props} />;
 };
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = withSessionSsr(async ({req}) => {
+  const user = req.session.user;
+  const data = await getAllCourses();
   return {
-    props: {
-      userInfo: {},
-    },
+    props: {courses: data?.courses ?? [], user: user ?? {}},
   };
-};
+});
