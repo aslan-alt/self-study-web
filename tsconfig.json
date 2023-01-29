@@ -19,7 +19,7 @@
     "forceConsistentCasingInFileNames": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "types": ["cypress","node"],
+    "types": ["node","jest"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "noEmit": true,
@@ -29,7 +29,8 @@
     "incremental": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "__tests__"
   ],
   "include": [
     "**/*.ts",

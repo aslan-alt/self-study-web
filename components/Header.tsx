@@ -48,7 +48,7 @@ export const Header: FC<Props> = ({openModal, isLogin}) => {
               });
             }}
           >
-            登录 ｜注册
+            登录 ｜ 注册
           </SignInButton>
         )}
       </Right>

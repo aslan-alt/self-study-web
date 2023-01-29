@@ -3,6 +3,7 @@ import {render, screen} from '@testing-library/react';
 import {useRouter} from 'next/router';
 import {TestWrapper} from '@/lib/testHelper';
 import Home from '../pages';
+import '@testing-library/jest-dom';
 
 jest.mock('next/router', () => ({
   __esModule: true,

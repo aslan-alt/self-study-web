@@ -7,7 +7,8 @@ const SignIn: NextPage<{user: User}> = () => {
   return (
     <Container>
       <div>
-        <span>用户名</span> <Input placeholder="请输入用户名" />
+        <span>用户名</span>
+        <Input placeholder="请输入用户名" />
       </div>
     </Container>
   );
