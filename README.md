@@ -13,14 +13,13 @@ psql -U blog
 create database test;
 
 // build typeorm file
-yarn typeorm:build
-
+pnpm typeorm:build
 // run migration (create table in psql)
-yarn typeorm migration:run
+pnpm typeorm migration:run
 ```
 #### start the nextJs server
 ```
-yarn dev
+pnpm dev
 ```
 
 ### How to Build nextJs container

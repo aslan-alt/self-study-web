@@ -1,9 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {AudioOutlined} from '@ant-design/icons';
 import {PlusOutlined} from '@ant-design/icons';
-import {Button, Input, Layout} from 'antd';
+import {Button, Input, Layout, Modal} from 'antd';
 import styled from 'styled-components';
-import {login} from '../requests/login';
+import {Icon} from '@/components/Icon';
+import {Log} from '@/components/Log';
+import {LoginForm} from '@/components/LoginForm';
+import {RegisterForm} from '@/components/RegisterForm';
+import {LOG_URL_WHITE} from '@/constants/index';
+
 const {Search} = Input;
 
 type Props = {
@@ -11,7 +16,19 @@ type Props = {
   isLogin: boolean;
 };
 
+export type ActionType = 'Register' | 'Login';
+
 export const Header: FC<Props> = ({openModal, isLogin}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [actionType, setActionType] = useState<ActionType>('Login');
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const updateActionType = (action: ActionType) => {
+    setActionType(action);
+  };
   return (
     <Container data-tn="header-container" style={{position: 'fixed', zIndex: 1, width: '100%'}}>
       <div>
@@ -42,16 +59,35 @@ export const Header: FC<Props> = ({openModal, isLogin}) => {
           <SignInButton
             type="primary"
             onClick={() => {
-              login({
-                username: 'aslan-test1234',
-                password: '123456122',
-              });
+              setIsOpen(true);
             }}
           >
             登录 ｜ 注册
           </SignInButton>
         )}
       </Right>
+
+      {isOpen && (
+        <StyledModal
+          actionType={actionType}
+          open={isOpen}
+          onOk={closeModal}
+          onCancel={closeModal}
+          footer={[]}
+        >
+          <ModalHeader>
+            <Log url={LOG_URL_WHITE} />
+            <CloseButton onClick={closeModal}>
+              <Icon name="close" size={1.5} />
+            </CloseButton>
+          </ModalHeader>
+          {actionType === 'Login' ? (
+            <LoginForm updateActionType={updateActionType} closeModal={closeModal} />
+          ) : (
+            <RegisterForm updateActionType={updateActionType} closeModal={closeModal} />
+          )}
+        </StyledModal>
+      )}
     </Container>
   );
 };
@@ -73,4 +109,31 @@ const Right = styled.div`
 
 const SignInButton = styled(Button)`
   border-radius: var(--mt-spacing-3x);
+`;
+
+const StyledModal = styled(Modal)<{actionType: ActionType}>`
+  .ant-modal-content {
+    padding: 0;
+    ${({actionType}) =>
+      actionType === 'Login' ? 'width: 500px;height: 500px;' : 'width: 500px;height: 540px;'}
+  }
+`;
+
+const ModalHeader = styled.div`
+  background: rgba(11, 12, 16);
+  height: 68px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+`;
+
+const CloseButton = styled.label`
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  right: 0;
+  top: 0;
+  cursor: pointer;
 `;

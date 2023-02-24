@@ -18,6 +18,7 @@ export default function App({Component, pageProps}: AppProps) {
         />
       </Head>
       <Component {...pageProps} />
+      <script src="//at.alicdn.com/t/c/font_3864759_rlayktq3xys.js"></script>
     </QueryClientProvider>
   );
 }
