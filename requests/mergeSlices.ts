@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {MergeSlicesRequest} from '../pages/api/Video/merge';
+import {MergeSlicesRequest} from '../pages/api/video/merge';
 import {api} from './config';
 
 export const mergeSlices = async (request: MergeSlicesRequest) => {

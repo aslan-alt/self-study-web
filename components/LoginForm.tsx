@@ -37,9 +37,7 @@ export const LoginForm: FC<Props> = ({updateActionType}) => {
     setIsLoading(false);
   };
 
-  const x = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-  };
+  const x = () => {};
   return (
     <Container>
       <FieldInput name="username" value={loginForm.username} placeholder="User Name" onInput={x} />
@@ -61,7 +59,6 @@ export const LoginForm: FC<Props> = ({updateActionType}) => {
         Not a member yet?{' '}
         <ToggleButton
           onClick={() => {
-            console.log('zzzzcxcxzcxz');
             updateActionType('Register');
           }}
         >
